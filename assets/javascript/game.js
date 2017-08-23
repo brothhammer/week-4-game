@@ -8,6 +8,7 @@ $(document).ready(function(){
   var currentScore = 0;
   var win = 0;
   var loss = 0;
+  var buttonValue = [];
   set();
 
   $(".currentScore").text(currentScore);
@@ -33,6 +34,7 @@ $(document).ready(function(){
 
   function reset(){
     targetNumber = undefined;
+    $(".targetNumber").empty();
     currentScore = 0;
     $(".currentScore").text(currentScore);
     button1 = undefined;
@@ -48,18 +50,34 @@ $(document).ready(function(){
       $(".target").html(targetNumber);
       console.log(targetNumber);
 
+    //stop duplicate
+    function buttonValueArray() {
+      var randomNumber = getRandomNumber(1,12);
+      if (buttonValue.indexOf(randomNumber) <0) {
+        buttonValue.push(randomNumber);
+      }
+    }
+
+    for(i=1; buttonValue.length<=4; i++){
+      buttonValueArray();
+    }
+
+    for(i=1; i<=4; i++){
+      buttoni = $("#button"+i).attr("val", buttonValue[i]);
+      console.log($("#button"+i).attr("val"));
+    }
 
     //loop to populate the value field of the buttons
-    for(i=1; i<=4; i++){
-    buttoni = $("#button"+i).attr("val", getRandomNumber(1,12));
-    console.log($("#button"+i).attr("val"));
-    }
+    // for(i=1; i<=4; i++){
+    // buttoni = $("#button"+i).attr("val", getRandomNumber(1,12));
+    // console.log($("#button"+i).attr("val"));
+    // }
 
     $("#button1").unbind("click");
     $("#button1").click(function(){
       currentScore = currentScore + parseInt($("#button1").attr("val"))
       $(".currentScore").text(currentScore);
-      console.log(currentScore);
+      // console.log(currentScore);
 
       winLoss();
     }) 
