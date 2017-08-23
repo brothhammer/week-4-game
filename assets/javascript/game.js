@@ -1,5 +1,5 @@
 $(document).ready(function(){
-
+  //global variable declaration
   var button1;
   var button2;
   var button3;
@@ -13,10 +13,12 @@ $(document).ready(function(){
 
   $(".currentScore").text(currentScore);
 
+  //called to generate the target number and the value for each button
   function getRandomNumber(min, max) {
     return Math.floor(Math.random() * (max - min +1)) + min;
   }
 
+  //called after each button click to check for a win or loss
   function winLoss() {
     if(currentScore === targetNumber){
     console.log("You Won")
@@ -32,6 +34,7 @@ $(document).ready(function(){
     }
   }
 
+  //called after a win or loss to reset the game except for the win loss counter
   function reset(){
     targetNumber = undefined;
     $(".targetNumber").empty();
@@ -45,7 +48,7 @@ $(document).ready(function(){
     set();
   }
 
-  //stop duplicate
+  //used to populate an array of four values when called in a for loop below
   function buttonValueArray() {
     var randomNumber = getRandomNumber(1,12);
     if (buttonValue.indexOf(randomNumber) <0) {
@@ -53,72 +56,31 @@ $(document).ready(function(){
     }
   }
 
-
+  //this function is called at the begining and again at te end of the reset
   function set(){
     //call function to generate random target number
     targetNumber = getRandomNumber(19,120);
       $(".target").html(targetNumber);
       console.log(targetNumber);
 
-    buttonValueArray();
-
+    //call function to populate array of random numbers
     for(i=1; buttonValue.length<=4; i++){
       buttonValueArray();
     }
 
+    //assign index of buttonValue array to html attribute value
     for(i=1; i<=4; i++){
       buttoni = $("#button"+i).attr("val", buttonValue[i]);
       console.log($("#button"+i).attr("val"));
     }
+  }
 
-    //loop to populate the value field of the buttons
-    // for(i=1; i<=4; i++){
-    // buttoni = $("#button"+i).attr("val", getRandomNumber(1,12));
-    // console.log($("#button"+i).attr("val"));
-    // }
-  } 
-    $(document).on("click", "button", function() {
-      currentScore = currentScore + parseInt($(this).attr("val"))
-      $(".currentScore").text(currentScore);
-      winLoss();
-    })
-
-
-    // $("#button1").unbind("click");
-    // $("#button1").click(function(){
-    //   currentScore = currentScore + parseInt($("#button1").attr("val"))
-    //   $(".currentScore").text(currentScore);
-    //   // console.log(currentScore);
-
-    //   winLoss();
-    // }) 
-
-    // $("#button2").unbind("click");
-    // $("#button2").click(function(){
-    //   currentScore = currentScore + parseInt($("#button2").attr("val"))
-    //   $(".currentScore").text(currentScore);
-    //   // console.log(currentScore);
-
-    //   winLoss();
-    // }) 
-
-    // $("#button3").unbind("click");
-    // $("#button3").click(function(){
-    //   currentScore = currentScore + parseInt($("#button3").attr("val"))
-    //   $(".currentScore").text(currentScore);
-    //   // console.log(currentScore);
-
-    //   winLoss();
-    // }) 
-
-    // $("#button4").unbind("click");
-    // $("#button4").click(function(){
-    //   currentScore = currentScore + parseInt($("#button4").attr("val"))
-    //   $(".currentScore").text(currentScore);
-    //   // console.log(currentScore);
-
-    //   winLoss();
-    // })
-  // }
+  //click handler moved outside the set function to avoid the use of .unbind
+  $(document).on("click", "button", function() {
+    currentScore = currentScore + parseInt($(this).attr("val"))
+    $(".currentScore").text(currentScore);
+    winLoss();
+  })
+   
 });
 
