@@ -19,13 +19,13 @@ $(document).ready(function(){
 
   function winLoss() {
     if(currentScore === targetNumber){
-    console.log("Youwon")
+    console.log("You Won")
     win++;
       $(".win").text("Wins "+win);
       reset();
     }
     else if(currentScore >= targetNumber){
-      console.log("youlost")
+      console.log("You Lost")
       loss++;
       $(".loss").text("Losses "+loss);
       reset();
@@ -41,8 +41,18 @@ $(document).ready(function(){
     button2 = undefined;
     button3 = undefined;
     button4 = undefined;
+    buttonValue = [];
     set();
   }
+
+  //stop duplicate
+  function buttonValueArray() {
+    var randomNumber = getRandomNumber(1,12);
+    if (buttonValue.indexOf(randomNumber) <0) {
+        buttonValue.push(randomNumber);
+    }
+  }
+
 
   function set(){
     //call function to generate random target number
@@ -50,13 +60,7 @@ $(document).ready(function(){
       $(".target").html(targetNumber);
       console.log(targetNumber);
 
-    //stop duplicate
-    function buttonValueArray() {
-      var randomNumber = getRandomNumber(1,12);
-      if (buttonValue.indexOf(randomNumber) <0) {
-        buttonValue.push(randomNumber);
-      }
-    }
+    buttonValueArray();
 
     for(i=1; buttonValue.length<=4; i++){
       buttonValueArray();
@@ -72,42 +76,49 @@ $(document).ready(function(){
     // buttoni = $("#button"+i).attr("val", getRandomNumber(1,12));
     // console.log($("#button"+i).attr("val"));
     // }
-
-    $("#button1").unbind("click");
-    $("#button1").click(function(){
-      currentScore = currentScore + parseInt($("#button1").attr("val"))
+  } 
+    $(document).on("click", "button", function() {
+      currentScore = currentScore + parseInt($(this).attr("val"))
       $(".currentScore").text(currentScore);
-      // console.log(currentScore);
-
-      winLoss();
-    }) 
-
-    $("#button2").unbind("click");
-    $("#button2").click(function(){
-      currentScore = currentScore + parseInt($("#button2").attr("val"))
-      $(".currentScore").text(currentScore);
-      // console.log(currentScore);
-
-      winLoss();
-    }) 
-
-    $("#button3").unbind("click");
-    $("#button3").click(function(){
-      currentScore = currentScore + parseInt($("#button3").attr("val"))
-      $(".currentScore").text(currentScore);
-      // console.log(currentScore);
-
-      winLoss();
-    }) 
-
-    $("#button4").unbind("click");
-    $("#button4").click(function(){
-      currentScore = currentScore + parseInt($("#button4").attr("val"))
-      $(".currentScore").text(currentScore);
-      // console.log(currentScore);
-
       winLoss();
     })
-  }
+
+
+    // $("#button1").unbind("click");
+    // $("#button1").click(function(){
+    //   currentScore = currentScore + parseInt($("#button1").attr("val"))
+    //   $(".currentScore").text(currentScore);
+    //   // console.log(currentScore);
+
+    //   winLoss();
+    // }) 
+
+    // $("#button2").unbind("click");
+    // $("#button2").click(function(){
+    //   currentScore = currentScore + parseInt($("#button2").attr("val"))
+    //   $(".currentScore").text(currentScore);
+    //   // console.log(currentScore);
+
+    //   winLoss();
+    // }) 
+
+    // $("#button3").unbind("click");
+    // $("#button3").click(function(){
+    //   currentScore = currentScore + parseInt($("#button3").attr("val"))
+    //   $(".currentScore").text(currentScore);
+    //   // console.log(currentScore);
+
+    //   winLoss();
+    // }) 
+
+    // $("#button4").unbind("click");
+    // $("#button4").click(function(){
+    //   currentScore = currentScore + parseInt($("#button4").attr("val"))
+    //   $(".currentScore").text(currentScore);
+    //   // console.log(currentScore);
+
+    //   winLoss();
+    // })
+  // }
 });
 
