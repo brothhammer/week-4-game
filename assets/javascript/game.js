@@ -21,7 +21,7 @@ $(document).ready(function(){
   //called after each button click to check for a win or loss
   function winLoss() {
     if(currentScore === targetNumber){
-    console.log("You Won")
+      console.log("You Won")
     win++;
       $(".win").text("Wins "+win);
       reset();
@@ -68,10 +68,10 @@ $(document).ready(function(){
       buttonValueArray();
     }
 
-    //assign index of buttonValue array to html attribute value
+    //assign index of buttonValue array to html attribute value un-comment the console log for checking
     for(i=1; i<=4; i++){
       buttoni = $("#button"+i).attr("val", buttonValue[i]);
-      console.log($("#button"+i).attr("val"));
+      // console.log($("#button"+i).attr("val"));
     }
   }
 
